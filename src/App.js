@@ -1,11 +1,12 @@
 // src/App.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap CSS
+import { Route, Routes, Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { CartProvider, useCart } from "./CartContext";
 
 // Ana sayfa bileşeni
+// Home page component
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -19,6 +20,7 @@ const Home = () => {
         setProducts(response.data);
 
         // Kategorileri elde etme
+        // Getting categories
         const uniqueCategories = [
           "All",
           ...new Set(response.data.map((product) => product.category)),
@@ -39,6 +41,7 @@ const Home = () => {
   return (
     <div className="bg-black text-white min-vh-100">
       {/* Sticky Header */}
+      {/* Sticky header */}
       <header className="sticky-top bg-dark text-white shadow-sm py-3">
         <div className="container-fluid d-flex justify-content-between align-items-center">
           <img
@@ -49,13 +52,13 @@ const Home = () => {
           <h1 className="mb-0">My Store</h1>
           <Link to="/cart" className="btn btn-outline-light">
             View Cart
-            {getTotalItems() > 0 && ` (${getTotalItems()})`}{" "}
-            {/* Toplam ürün adedini göster */}
+            {getTotalItems() > 0 && ` (${getTotalItems()})`}
           </Link>
         </div>
       </header>
 
       {/* Main Content */}
+      {/* Main content */}
       <div className="container-fluid mt-5">
         <div className="d-flex flex-wrap mb-4">
           {categories.map((category) => (
@@ -65,7 +68,7 @@ const Home = () => {
                 category === selectedCategory
                   ? "btn-dark"
                   : "btn-outline-secondary"
-              } me-2 mb-2 text-uppercase`} // Koyu arka plan ve büyük harf
+              } me-2 mb-2 text-uppercase`}
               onClick={() => handleCategorySelect(category)}
             >
               {category}
@@ -73,7 +76,9 @@ const Home = () => {
           ))}
         </div>
 
-        <div className="row">
+        {/* Ürünleri Yatay Olarak Ortalamak İçin */}
+        {/* Center-aligning the products horizontally */}
+        <div className="row justify-content-center">
           {products
             .filter(
               (product) =>
@@ -82,8 +87,6 @@ const Home = () => {
             )
             .map((product) => (
               <div className="col-md-2 mb-3" key={product.id}>
-                {" "}
-                {/* Her satırda 6 ürün */}
                 <div className="card h-100 bg-dark text-white">
                   <img
                     src={product.image}
@@ -101,7 +104,7 @@ const Home = () => {
                     <p className="card-text">${product.price.toFixed(2)}</p>
                     <button
                       className="btn btn-outline-light mt-auto"
-                      onClick={() => addToCart(product)} // Ürünü sepete ekle
+                      onClick={() => addToCart(product)}
                     >
                       Add to Cart
                     </button>
@@ -116,21 +119,25 @@ const Home = () => {
 };
 
 // Sepet bileşeni
+// Cart component
 const Cart = () => {
   const { cart, removeFromCart, getTotalItems, getTotalPrice } = useCart();
 
   return (
     <div className="bg-black text-white min-vh-100">
+      {/* Sticky Header */}
+      {/* Sticky header */}
       <header className="sticky-top bg-dark text-white shadow-sm py-3">
         <div className="container-fluid d-flex justify-content-between align-items-center">
           <h1 className="mb-0">Your Cart</h1>
           <Link to="/" className="btn btn-outline-light">
             Back to Products
-          </Link>{" "}
-          {/* Ürünler Sayfasına Dön */}
+          </Link>
         </div>
       </header>
 
+      {/* Cart Content */}
+      {/* Cart content */}
       <div className="container-fluid mt-5">
         <div className="row">
           {Object.values(cart).length === 0 ? (
@@ -187,6 +194,7 @@ const Cart = () => {
 };
 
 // Ana bileşen
+// Main component
 const App = () => {
   return (
     <CartProvider>
