@@ -43,9 +43,31 @@ export const CartProvider = ({ children }) => {
       .toFixed(2);
   };
 
+  // Miktarı azaltma işlevi
+  const decrementQuantity = (productId) => {
+    setCart((prevCart) => {
+      const product = prevCart[productId];
+      if (product) {
+        // Miktarı 1 azalt
+        const updatedQuantity = product.quantity - 1;
+        if (updatedQuantity > 0) {
+          return {
+            ...prevCart,
+            [productId]: { ...product, quantity: updatedQuantity },
+          };
+        } else {
+          // Miktar 0'a düştüğünde ürünü sepetten kaldır
+          const { [productId]: _, ...rest } = prevCart;
+          return rest;
+        }
+      }
+      return prevCart;
+    });
+  };
+
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, getTotalItems, getTotalPrice }}
+      value={{ cart, addToCart, removeFromCart, decrementQuantity, getTotalItems, getTotalPrice }}
     >
       {children}
     </CartContext.Provider>
