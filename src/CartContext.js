@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext } from "react";
 
 // Sepet bağlamını oluştur
 const CartContext = createContext();
@@ -30,16 +30,23 @@ export const CartProvider = ({ children }) => {
 
   // Sepetteki toplam ürün sayısını hesaplama işlevi
   const getTotalItems = () => {
-    return Object.values(cart).reduce((total, product) => total + product.quantity, 0);
+    return Object.values(cart).reduce(
+      (total, product) => total + product.quantity,
+      0
+    );
   };
 
   // Sepetteki toplam fiyatı hesaplama işlevi
   const getTotalPrice = () => {
-    return Object.values(cart).reduce((total, product) => total + product.quantity * product.price, 0).toFixed(2);
+    return Object.values(cart)
+      .reduce((total, product) => total + product.quantity * product.price, 0)
+      .toFixed(2);
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, getTotalItems, getTotalPrice }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, getTotalItems, getTotalPrice }}
+    >
       {children}
     </CartContext.Provider>
   );
