@@ -48,7 +48,9 @@ const Home = () => {
           <h1 className="mb-0">My Store</h1>
           <Link to="/cart" className="btn btn-outline-light">
             View Cart
-            {getTotalItems() > 0 && ` (${getTotalItems()})`}{" "}
+            {getTotalItems() &&
+              getTotalPrice() > 0 &&
+              ` (${getTotalItems()})=$${getTotalPrice()}`}{" "}
             {/* Toplam ürün adedini göster */}
           </Link>
         </div>
@@ -115,38 +117,6 @@ const Home = () => {
                 </div>
               </div>
             ))}
-        </div>
-
-        {/* Açıklama ve toplamlar */}
-        <div className="row mt-4">
-          <div className="col-md-12 d-flex justify-content-center">
-            <div
-              className="card bg-dark text-white border-light"
-              style={{ width: "300px" }}
-            >
-              <div className="card-body">
-                <h5 className="card-title">Product Overview</h5>
-                <p className="card-text">
-                  <strong style={{ fontSize: "1.25rem" }}>Total Items:</strong>{" "}
-                  <span style={{ fontSize: "1.5rem", fontWeight: "bold" }}>
-                    {getTotalItems()}
-                  </span>
-                </p>
-                <p className="card-text">
-                  <strong style={{ fontSize: "1.25rem" }}>Total Price:</strong>{" "}
-                  <span style={{ fontSize: "1.5rem", fontWeight: "bold" }}>
-                    ${getTotalPrice()}
-                  </span>
-                </p>
-                <p className="card-text mt-3">
-                  <small>
-                    Summary of the total number of products and their total
-                    cost.
-                  </small>
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
