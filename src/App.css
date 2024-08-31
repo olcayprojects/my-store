@@ -1,19 +1,47 @@
 /* src/App.css */
 .card {
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  
-  .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .img-thumbnail {
-    border: 1px solid #ddd;
-  }
-  
-  .total-section {
-    position: sticky;
-    top: 0;
-  }
-  
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.img-thumbnail {
+  border: 1px solid #ddd;
+}
+
+.total-section {
+  position: sticky;
+  top: 0;
+}
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.card {
+  width: 300px;
+  height: 200px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  perspective: 1000px; /* 3D dönüşüm efekti için */
+}
+
+.card h2 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.card p {
+  margin: 0;
+  font-size: 1em;
+}
